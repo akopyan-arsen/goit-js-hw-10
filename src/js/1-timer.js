@@ -19,6 +19,9 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  locale: {
+    firstDayOfWeek: 1,
+  },
   onClose(selectedDates) {
     if (selectedDates[0].getTime() > Date.now()) {
       userSelectedDate = selectedDates[0].getTime();
@@ -33,6 +36,11 @@ const options = {
         messageColor: '#fff',
         timeout: 1500,
       });
+    }
+  },
+  onChange(selectedDates) {
+    if (selectedDates[0].getTime() <= Date.now()) {
+      startBtn.disabled = true;
     }
   },
 };
