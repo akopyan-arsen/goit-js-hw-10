@@ -60,7 +60,6 @@ function start() {
     updateClockface(convertMs(elapsedTime));
     if (elapsedTime <= 0) {
       clearInterval(intervalId);
-      startBtn.disabled = false;
       input.disabled = false;
     }
   }, 1000);
