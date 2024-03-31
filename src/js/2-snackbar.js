@@ -32,7 +32,6 @@ function handleClick(event) {
       iziToast.success({
         message: `✅ Fulfilled promise in ${delay}ms`,
         position: 'topRight',
-        timeout: 0,
         backgroundColor: '#59A10D',
         messageColor: '#fff',
         timeout: 3000,
@@ -43,7 +42,6 @@ function handleClick(event) {
       iziToast.error({
         message: `❌ Rejected promise in ${delay}ms`,
         position: 'topRight',
-        timeout: 0,
         backgroundColor: '#EF4040',
         messageColor: '#fff',
         timeout: 3000,
@@ -51,9 +49,3 @@ function handleClick(event) {
       });
     });
 }
-
-form.addEventListener('keypress', function (event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-  }
-});
