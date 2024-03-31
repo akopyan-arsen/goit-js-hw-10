@@ -1,28 +1,59 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const inputBtn = document.querySelector('button[type="submit"]');
-const radioBtn = document.querySelectorAll('input[type="ratio"]');
+const form = document.querySelector('.form');
+const input = document.querySelector('input[type="number"]');
+const state = document.querySelectorAll('input[name="state"]');
 
-inputBtn.addEventListener('click', handleClick);
+form.addEventListener('submit', handleClick);
 
-let selectedValue = null;
+function handleClick(event) {
+  event.preventDefault();
+  let delay = parseInt(input.value);
+  let stateValue;
+  state.forEach(radio => {
+    if (radio.checked) {
+      stateValue = radio.value;
+    }
+  });
 
-function handleClick() {
-  if (input.value < 0) {
-    return;
-  } else {
-    radioBtn.forEach(item => {
-      if (item.checked) {
-        selectedValue = item.value;
-      }
-    });
-    promise = new Promise((resolve, reject) => {
-      if (selectedValue !== null) {
-        resolve(selectedValue);
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (stateValue === 'fulfilled') {
+        resolve(delay);
       } else {
-        reject(selectedValue);
+        reject(delay);
       }
+    }, delay);
+  });
+
+  promise
+    .then(delay => {
+      iziToast.success({
+        message: `✅ Fulfilled promise in ${delay}ms`,
+        position: 'topRight',
+        timeout: 0,
+        backgroundColor: '#59A10D',
+        messageColor: '#fff',
+        timeout: 3000,
+        icon: false,
+      });
+    })
+    .catch(delay => {
+      iziToast.error({
+        message: `❌ Rejected promise in ${delay}ms`,
+        position: 'topRight',
+        timeout: 0,
+        backgroundColor: '#EF4040',
+        messageColor: '#fff',
+        timeout: 3000,
+        icon: false,
+      });
     });
-  }
 }
+
+form.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+  }
+});

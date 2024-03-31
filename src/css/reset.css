@@ -59,3 +59,7 @@ textarea {
   flex-direction: column;
   gap: 16px;
 }
+
+.home {
+  margin-bottom: 16px;
+}
